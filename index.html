@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="fr"><head><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Rémi & Mélanie — Save the Date</title>
+<style>
+
+body {
+    margin: 0;
+    min-height: 100svh;
+    background:
+        radial-gradient(ellipse at 15% 20%,
+            rgba(222, 177, 199, 0.65) 0%,
+            transparent 40%),
+        radial-gradient(ellipse at 85% 25%,
+            rgba(190, 170, 210, 0.55) 0%,
+            transparent 42%),
+        radial-gradient(ellipse at 25% 85%,
+            rgba(230, 190, 205, 0.65) 0%,
+            transparent 45%),
+        radial-gradient(ellipse at 90% 85%,
+            rgba(190, 205, 185, 0.45) 0%,
+            transparent 40%),
+        #f8f1f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.scene {
+    width:min(94vw,620px);
+    height:min(92svh,900px);
+    min-height:600px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    perspective:1400px
+}
+
+.envelope {
+    position: absolute;
+    width: min(88vw, 450px);
+    height: min(58vw, 310px);
+    max-height: 310px;
+    min-height: 220px;
+    bottom: 18%;
+    background: #fffdf9;
+    border: 1px solid #eee5dc;
+    border-radius: 5px;
+    box-shadow: 0 15px 40px rgba(80, 50, 70, 0.10);
+    overflow: hidden;
+    transition: transform .7s ease, opacity .7s ease;
+}
+
+/* Fond arrière */
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #fdfaf6;
+}
+
+/* .envelope:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 49.7%,#e9e2ec 50%,transparent 50.4%),linear-gradient(225deg,transparent 49.7%,#e9e2ec 50%,transparent 50.4%);opacity:.7}
+*/
+
+.envelope-flap {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 60%;
+    background: #fffdf9;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform .85s cubic-bezier(.2,.75,.2,1);
+    z-index: 3;
+}
+
+.flap-outline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.envelope-label {
+    position: absolute;
+    z-index: 5;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font: 38px "Great Vibes", cursive;
+    color: #65327c;
+}
+
+/* Face de l'enveloppe */
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        #fffdf9,
+        #fdf8f3
+    );
+    z-index: 2;
+}
+
+/* Prénoms */
+.envelope-names {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-size: 38px;
+    color: #65327c;
+    z-index: 4;
+}
+
+.envelope-flower {
+    position: absolute;
+    width: 110px;
+    height: auto;
+    bottom: 0px;
+    left: 5px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.envelope-flower2 {
+    position: absolute;
+    width: 90px;
+    height: auto;
+    top: 40px;
+    right: 0px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.envelope-flower3 {
+    position: absolute;
+    width: 110px;
+    height: auto;
+    bottom: 0px;
+    right: 0px;
+    z-index: 4;
+    rotate: 220deg;
+    pointer-events: none;
+}
+
+.envelope-flower4 {
+    position: absolute;
+    width: 70px;
+    height: auto;
+    bottom: 0px;
+    right: 80px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.envelope-flower5 {
+    position: absolute;
+    width: 40px;
+    height: auto;
+    bottom: 0px;
+    right: 55px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.flower-on-flap {
+    position: absolute;
+    width: 70px;
+    height: auto;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-15deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.card-wrap{position:absolute;width:min(82vw,380px);aspect-ratio:1024/1461;bottom:20%;z-index:2;transform:translateY(140px) scale(.84);opacity:0;transition:transform 1.1s cubic-bezier(.2,.75,.2,1),opacity .5s ease;perspective:1400px;cursor:pointer}
+.card{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.75,.2,1);border-radius:4px;box-shadow:0 18px 42px #321c4326}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:4px;overflow:hidden;background:white}.face img{width:100%;height:100%;object-fit:contain;display:block}.back{transform:rotateY(180deg)}
+
+/* Animation d'ouverture existante */
+.scene.open .envelope {
+    transform: translateY(95px);
+    opacity: .5;
+}
+
+.scene.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.scene.open .envelope-label {
+    opacity: 0;
+}
+
+.scene.open .card-wrap {
+    transform: translateY(-80px) scale(1);
+    opacity: 1;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.hint{position:absolute;top:8%;width:100%;text-align:center;font:italic clamp(18px,4vw,24px) Georgia,serif;color:#65327c;padding:0 14px}.scene.open .hint{top:3%}
+@media(max-height:700px){.scene{min-height:520px}.envelope{bottom:15%}.card-wrap{bottom:16%;width:min(70vw,300px)}}
+</style></head><body><div class="scene" id="scene">
+<div class="hint" id="hint">Une petite surprise vous attend…</div><div class="flower-decoration"><span class="d1">✿</span><span class="d2">❀</span><span class="d3">✽</span><span class="d4">✿</span></div>
+
+<div class="envelope">
+    <div class="envelope-back"></div>
+    <img src="fleur_rouge.png" class="envelope-flower" alt="">
+    <img src="feuilles.png" class="envelope-flower2" alt="">
+    <img src="fleur_jaune.png" class="envelope-flower3" alt="">
+    <img src="fleur_bleu.png" class="envelope-flower4" alt="">
+    <img src="violet.png" class="envelope-flower5" alt="">
+
+    <div class="envelope-flap">
+    <svg class="flap-outline" viewBox="0 0 450 186" preserveAspectRatio="none">
+        <path d="M0 0 L225 186 L450 0"
+              fill="none"
+              stroke="#333333"
+              stroke-width="1.2"/>
+    </svg>
+
+    <div class="envelope-names">Rémi &amp; Mélanie</div>
+    <img src="rose.png" class="flower-on-flap" alt="">
+</div>
+    <div class="envelope-front"></div>
+</div>
+
+<div class="card-wrap" id="cardWrap" aria-label="Faire-part, cliquez pour le retourner"><div class="card" id="card"><div class="face front"><img src="recto.png" alt="Save the Date"></div><div class="face back"><img src="verso_samedi.png" alt="Calendrier de juin 2028"></div></div></div></div>
+
+
+
+
+<script>
+const scene = document.getElementById('scene');
+const card = document.getElementById('card');
+const hint = document.getElementById('hint');
+const envelope = document.querySelector('.envelope');
+
+let opened = false;
+
+envelope.addEventListener('click', () => {
+    if (!opened) {
+        scene.classList.add('open');
+        opened = true;
+        hint.textContent = 'Votre invitation';
+    } else {
+        scene.classList.remove('open');
+        card.classList.remove('flipped');
+        opened = false;
+        hint.textContent = 'Une petite surprise vous attend…';
+    }
+});
+
+card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (opened) {
+        card.classList.toggle('flipped');
+    }
+});
+
+</script></body></html>
